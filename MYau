@@ -1,0 +1,112 @@
+\\  Melanie Yau - Molar Mass App \\
+
+import UIKit
+ 
+class ViewController: UIViewController {
+ 
+    @IBOutlet weak var topLeftText: UITextField!
+    @IBOutlet weak var topRightText: UITextField!
+    
+    @IBOutlet weak var middleLeftText: UITextField!
+    @IBOutlet weak var middleRightText: UITextField!
+    
+    @IBOutlet weak var bottomLeftText: UITextField!
+    @IBOutlet weak var bottomRightText: UITextField!
+    
+    
+    @IBOutlet weak var resultsText: UITextField!
+    var pTable: [String: Double] = [:]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    
+    let elemSymbols = ["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga","Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn",  "Nh", "Fl", "Mc", "Lv", "Ts", "Og"]
+    
+    let elemMasses = [1.007, 4.002, 6.941, 9.012, 10.811, 12.011, 14.007, 15.999, 18.998, 20.18, 22.99, 24.305, 26.982, 28.086, 30.974, 32.065, 35.453, 39.948, 39.098, 40.078, 44.956, 47.867, 50.942, 51.996, 54.938, 55.845, 58.933, 58.693, 63.546, 65.38, 69.723, 72.64, 74.922, 78.96, 79.904, 83.798, 85.468, 87.62, 88.906, 91.224, 92.906, 95.96, 98, 101.07, 102.906, 106.42, 107.868, 112.411, 114.818, 118.71, 121.76, 127.6, 126.904, 131.293, 132.905, 137.327, 138.905, 140.116, 140.908, 144.242, 145, 150.36, 151.964, 157.25, 158.925, 162.5, 164.93, 167.259, 168.934, 173.054, 174.967, 178.49, 180.948, 183.84, 186.207, 190.23, 192.217, 195.084, 196.967, 200.59, 204.383, 207.2, 208.98, 210, 210, 222, 223, 226, 227, 232.038, 231.036, 238.029, 237, 244, 243, 247, 247, 251, 252, 257, 258, 259, 262, 261, 262, 266, 264, 267, 268, 271, 272, 285, 284, 289, 288, 292, 295, 294]
+    
+ 
+for (i, element) in elemSymbols.enumerated() {
+   pTable[element] = elemMasses[i]
+}
+    }
+ 
+    @IBAction func onCalculatePressed(_ sender: Any) {
+        if middleLeftText.text == "" && middleRightText.text == "" && bottomLeftText.text == "" && bottomRightText.text == "" {
+// Only one element
+        
+           let topLeft = topLeftText.text!
+           let topRight = topRightText.text!
+               
+           let firstNum = Double(topRight)!
+               
+            let mass1 = pTable[topLeft.capitalized]
+           let result1 = mass1! * firstNum
+            let totalMM = result1
+            resultsText.text = "\(totalMM)"
+            
+        }else if bottomLeftText.text == "" && bottomRightText.text == "" {
+// Two elements
+            let topLeft = self.topLeftText.text!
+            let topRight = self.topRightText.text!
+ 
+        let firstNum = Double(topRight)!
+ 
+            let mass1 = self.pTable[topLeft.capitalized]
+        let result1 = mass1! * firstNum
+ 
+            let middleLeft = self.middleLeftText.text!
+            let middleRight = self.middleRightText.text!
+                
+            let secondNum = Double(middleRight)!
+ 
+            let mass2 = self.pTable[middleLeft.capitalized]
+            let result2 = mass2! * secondNum
+            print(result2)
+                    let totalMM = result1 + result2
+            self.resultsText.text = "\(totalMM)"
+        } else {
+            let topLeft = self.topLeftText.text!
+            let topRight = self.topRightText.text!
+        
+    let firstNum = Double(topRight)!
+        
+            let mass1 = self.pTable[topLeft.capitalized]
+    let result1 = mass1! * firstNum
+    print(result1)
+//Calculate total molar mass for the first element
+            let middleLeft = self.middleLeftText.text!
+            let middleRight = self.middleRightText.text!
+        
+    let secondNum = Double(middleRight)!
+    
+            let mass2 = self.pTable[middleLeft.capitalized]
+    let result2 = mass2! * secondNum
+    print(result2)
+//Calculate total molar mass for the second element
+            let bottomLeft = self.bottomLeftText.text!
+            let bottomRight = self.bottomRightText.text!
+        
+    let thirdNum = Double(bottomRight)!
+        
+            let mass3 = self.pTable[bottomLeft.capitalized]
+    let result3 = mass3! * thirdNum
+    print(result3)
+//Calculate total molar mass for the third element
+    let totalMM = result1 + result2 + result3
+            self.resultsText.text = "\(totalMM)"
+//Add and print out sum of results
+        }
+      
+    
+    }
+    @IBAction func onPressedClear(_ sender: Any) {
+        self.topLeftText.text = ""
+        self.middleLeftText.text = ""
+        self.bottomLeftText.text = ""
+        self.topRightText.text = ""
+        self.middleRightText.text = ""
+        self.bottomRightText.text = ""
+        self.resultsText.text = ""
+    }
+ 
+}
