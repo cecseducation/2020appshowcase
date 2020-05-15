@@ -21,7 +21,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         emailOutlet.layer.cornerRadius = 15
         
     }
- 
+
     private func setupView() {
         let path = URL(fileURLWithPath: Bundle.main.path(forResource: "Banner1", ofType: "mov")!)
         let player = AVPlayer(url: path)
